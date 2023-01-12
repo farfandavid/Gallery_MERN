@@ -56,6 +56,11 @@ export const updatePost = async (req, res) => {
 
     // if a new image is uploaded upload it to cloudinary
     if (req.files?.image) {
+      // delete old image
+      const oldPost = await Post.findById(id);
+      if (oldPost.image.public_id) {
+        await deleteImage(oldPost.image.public_id);
+      }
       const result = await updloadImage(req.files.image.tempFilePath);
       await fs.remove(req.files.image.tempFilePath);
       //console.log(result);
@@ -72,6 +77,7 @@ export const updatePost = async (req, res) => {
          new: true,
        }
      ); */
+
     const updatedPosts = await Post.findByIdAndUpdate(id,
       {
 
@@ -83,7 +89,6 @@ export const updatePost = async (req, res) => {
 
       }
       , { new: true });
-    //updatedPosts.save();
 
     return res.json(updatedPosts);
   } catch (error) {
