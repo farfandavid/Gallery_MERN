@@ -37,16 +37,6 @@ export const createPost = async (req, res) => {
   }
 }
 
-/* export const updatePost = async (req, res) => {
-  try {
-    const updatedPosts = await Post.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    //const post = await Post.updateOne({ _id: req.params.id }, req.body, { new: true });
-    //console.log(post);
-    return res.send(updatedPosts);
-  } catch (error) {
-    return res.status(500).json({ message: error.message });
-  }
-} */
 
 export const updatePost = async (req, res) => {
   try {
@@ -70,13 +60,6 @@ export const updatePost = async (req, res) => {
       }
 
     }
-    /*  const updatedPost = await Post.findByIdAndUpdate(
-       id,
-       { $set: req.body },
-       {
-         new: true,
-       }
-     ); */
 
     const updatedPosts = await Post.findByIdAndUpdate(id,
       {

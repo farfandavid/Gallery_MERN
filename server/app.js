@@ -1,6 +1,7 @@
 import express from "express";
 import fileUpload from "express-fileupload";
 import postRoutes from './routes/posts.routes.js'
+import userRoutes from './routes/users.routes.js'
 
 const app = express();
 // middlewares
@@ -10,7 +11,7 @@ app.use(fileUpload({
   tempFileDir: './upload'
 }))
 // routes
-app.use(postRoutes);
+app.use([postRoutes, userRoutes]);
 
 
 export default app;
